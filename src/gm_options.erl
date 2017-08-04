@@ -46,6 +46,13 @@ opt({draw, Primitive, XInset, YInset}) ->
     {xinset, XInset},
     {yinset, YInset}
   ]};
+opt({draw, text=Primitive, XInset, YInset, Text}) ->
+  {"-draw", ":primitive :xinset,:yinset \":text\"", [
+    {primitive, Primitive},
+    {xinset, XInset},
+    {yinset, YInset},
+    {text, Text}
+  ]};
 opt({draw, Primitive, XInset, YInset, XOffset, YOffset}) ->
   {"-draw", ":primitive :x_inset,:y_inset :x_offset,:y_offset", [
     {primitive, Primitive},
@@ -65,6 +72,8 @@ opt(flatten) -> {"-flatten"};
 opt({fill, Color}) ->
   {"-fill", ":color", [{color, Color}]};
 opt(flip) -> {"-flip"};
+opt({font, Font}) ->
+  {"-font", ":font", [{font, Font}]};
 opt({format, Format}) ->
   {"-format", ":format", [{format, Format}]};
 opt({geometry, Width, Height}) ->
@@ -102,6 +111,8 @@ opt({opaque, Color}) ->
   {"-opaque", ":color", [{color, Color}]};
 opt({output_directory, Dir}) ->
   {"-output-directory", ":output_directory", [{output_directory, Dir}]};
+opt({pointsize, Quality}) ->
+  {"-pointsize", ":pointsize", [{pointsize, Quality}]};
 opt({quality, Quality}) ->
   {"-quality", ":quality", [{quality, Quality}]};
 opt({resize, Width, Height}) ->
