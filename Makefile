@@ -1,13 +1,19 @@
-all:
-	mkdir -p ebin
-	cp src/gm.app.src ebin/gm.app
-	erlc -pa . -o ebin/ src/*.erl
+all: deps
 
-test:
-	erlc -DTEST -pa . -o ebin/ src/*.erl
-	erl -pa ebin/ -eval 'eunit:test(gm), init:stop().'
+deps:
+	rebar get-deps
+	rebar compile
 
-console:
-	erl -pa ebin/
+app:
+	rebar compile
 
-full: all test
+tests:
+	rebar eunit
+
+clean:
+	rebar clean
+
+distclean: clean
+	rebar delete-deps
+
+.PHONY: all deps app tests clean distclean

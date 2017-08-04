@@ -1,5 +1,10 @@
 -module(gm_format_char).
--export([val/1]).
+
+-export([
+    val/1
+]).
+
+-spec val(Param :: atom()) -> string().
 
 val(file_size) -> "%b";
 val(comment) -> "%c";

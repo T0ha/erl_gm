@@ -8,8 +8,7 @@ An Erlang GraphicsMagick wrapper
 % Crop image into 100x100 tiles
 gm:convert("/some/image.jpg", "tile", [{crop, 100, 100}]).
 
-% Get multiple identify properties (returns a list of key value pairs
-% to be parsed by proplist:get_value
+% Get multiple identify properties (returns a map of characteristics)
 gm:identify_explicit("/some/image.jpg", [width, height, filename, type]).
 
 % Crazytown
