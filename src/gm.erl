@@ -205,7 +205,8 @@ cmd_error(Msg) ->
     parse_error(Msg, Errors).
 
 %% Run through each error, checking for a match.
-parse_error(_, []) ->
+parse_error(Msg, []) ->
+    error_logger:info_msg("GM error: ~p", [Msg]),
     {error, unknown_error};
 parse_error(Cmd, [{ErrorDescription, Error}|Errors]) ->
     case re:run(Cmd, ErrorDescription) of
@@ -217,7 +218,9 @@ parse_error(Cmd, [{ErrorDescription, Error}|Errors]) ->
 parse_result(Result) ->
     case Result of
         {0, Msg} -> {ok, Msg};
-        {_, Msg} -> cmd_error(Msg)
+        {Code, Msg} -> 
+            error_logger:info_msg("Code: ~p", [Code]),
+            cmd_error(Msg)
     end.
 
 parse_version(Str) ->
